@@ -43,7 +43,7 @@ def main():
         st.text(model.predict(df.drop(['alcohol'], axis=1).loc[row_number].values.reshape(1, -1))[0])
 
 
-@st.cache(allow_output_mutation=True)
+@st.cache_resource(allow_output_mutation=True)
 def train_model(df):
     X = np.array(df.drop(['alcohol'], axis=1))
     y= np.array(df['alcohol'])
@@ -55,7 +55,7 @@ def train_model(df):
 
     return model, model.score(X_test, y_test)
 
-@st.cache
+@st.cache_data
 def load_data():
     return pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data', names=['alcohol', 'malic_acid', 'ash', 'alcalinity_of_ash', 'magnesium', 'total_phenols','flavanoids', 'nonflavanoid_phenols' ,'proanthocyanins', 'color_intensity', 'hue', 'OD280/OD315_of_diluted_wines', 'proline'], delimiter=",", index_col=False)
 
