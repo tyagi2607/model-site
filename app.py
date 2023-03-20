@@ -43,7 +43,7 @@ def main():
         st.text(model.predict(df.drop(['alcohol'], axis=1).loc[row_number].values.reshape(1, -1))[0])
 
 
-@st.cache_resource
+@st.cache_data
 def train_model(df):
     X = np.array(df.drop(['alcohol'], axis=1))
     y= np.array(df['alcohol'])
